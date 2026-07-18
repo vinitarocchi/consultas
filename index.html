@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vini Tarocchi - Previsões e Autoconhecimento</title>
+    <style>
+        :root {
+            --bg-color: #FDF9F1;
+            --grid-color: rgba(0, 0, 0, 0.04); /* Linhas mais sutis */
+            --text-color: #1A1A1A;
+            --primary-purple: #8A2BE2;
+            --lime-green: #CCFF00;
+            --shadow-color: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px; /* Quadrados maiores */
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header / Perfil */
+        .profile-section {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 40px;
+        }
+
+        .profile-pic {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--text-color);
+            box-shadow: 4px 4px 0px var(--shadow-color);
+            margin-bottom: 20px;
+        }
+
+        .brand-name {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4A4A4A;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        /* Copywriting / Funil com Técnicas de Marketing */
+        .funnel-copy {
+            background: #FFFFFF;
+            border: 3px solid var(--text-color);
+            box-shadow: 6px 6px 0px var(--shadow-color);
+            border-radius: 12px;
+            padding: 30px 20px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .funnel-copy h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #DC2626;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .funnel-copy p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .funnel-copy p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            background-color: var(--primary-purple);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .benefits-list {
+            text-align: left;
+            margin-top: 20px;
+            padding: 15px;
+            background: #F3F4F6;
+            border: 2px dashed var(--text-color);
+            border-radius: 8px;
+        }
+        
+        .benefits-list h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-purple);
+        }
+
+        .benefits-list ul {
+            list-style: none;
+        }
+        .benefits-list li {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .benefits-list li::before {
+            content: '✓ ';
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        /* Sessão de Comentários / Testimonials */
+        .testimonials-wrapper {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            font-size: 1.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 6px;
+            background-color: var(--lime-green);
+            bottom: 2px;
+            left: 0;
+            z-index: -1;
+        }
+
+        .testimonials-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-purple) #E5E0D5;
+        }
+        
+        .testimonials-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .testimonials-container::-webkit-scrollbar-thumb {
+            background-color: var(--primary-purple);
+            border-radius: 4px;
+        }
+
+        .testimonial-card {
+            min-width: 280px;
+            background: #FFFFFF;
+            border: 3px solid var(--text-color);
+            box-shadow: 4px 4px 0px var(--shadow-color);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-weight: 500;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .testimonial-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #666;
+            border-top: 1px dashed #CCC;
+            padding-top: 8px;
+        }
+        .stars { color: #F59E0B; }
+
+        /* Delivery Method Alert */
+        .delivery-alert {
+            background-color: #E0E7FF;
+            border: 3px solid var(--primary-purple);
+            box-shadow: 4px 4px 0px var(--primary-purple);
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        /* Cartões de Atendimento */
+        .service-card {
+            background: #FFFFFF;
+            border: 3px solid var(--text-color);
+            box-shadow: 6px 6px 0px var(--shadow-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .service-title {
+            background-color: var(--primary-purple);
+            color: #FFFFFF;
+            padding: 15px;
+            border: 3px solid var(--text-color);
+            box-shadow: 4px 4px 0px var(--shadow-color);
+            border-radius: 8px;
+            font-size: 1.3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: -45px;
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: var(--text-color);
+            color: var(--lime-green);
+            padding: 5px 12px;
+            border: 2px solid var(--text-color);
+            border-radius: 6px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            box-shadow: 2px 2px 0px var(--shadow-color);
+        }
+
+        .service-desc {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .payment-info {
+            background-color: #FEF08A; 
+            border: 3px dashed var(--text-color);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .payment-info strong {
+            font-weight: 900;
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            background-color: var(--lime-green);
+            color: var(--text-color);
+            text-decoration: none;
+            text-align: center;
+            padding: 18px;
+            border: 3px solid var(--text-color);
+            box-shadow: 4px 4px 0px var(--shadow-color);
+            border-radius: 8px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .cta-button:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--shadow-color);
+        }
+
+        .cta-button i {
+            margin-right: 8px;
+            font-size: 1.3rem;
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- Cabeçalho -->
+    <div class="profile-section">
+        <img src="https://i.ibb.co/JF0b2JXT/IMG-5924.jpg" alt="Vini Tarocchi" class="profile-pic">
+        <h1 class="brand-name">Vini Tarocchi</h1>
+        <p class="subtitle">    Não tome decisões no escuro: Consulte o Tarot e escolha seu caminho com mais confiança.</p>
+    </div>
+
+    <!-- Funil de Vendas / Copy Aprimorada -->
+    <div class="funnel-copy">
+        <h2>NÃO SE ARRISQUE!</h2>
+        <p>Até quando você vai aceitar tomar decisões caminhando no escuro?</p>
+        <p>A ansiedade de não saber o dia de amanhã rouba a sua paz. O tarot não muda a sua vida como um passe de mágica, ele <strong>mostra exatamente onde você pode mudá-la</strong>. Desbloqueie seus caminhos e <strong>evite erros fatais</strong> antes que seja tarde demais.</p>
+        <p>O Tarot prevê o futuro SIM. Com o <span class="highlight">Método Europeu</span>, trazemos um nível altíssimo de precisão e assertividade nas leituras, revelando o que está oculto e apontando a direção certa.</p>
+        
+        <div class="benefits-list">
+            <h3>Por que se consultar hoje?</h3>
+            <ul>
+                <li>Acabe com a angústia da incerteza</li>
+                <li>Entenda as reais intenções das pessoas</li>
+                <li>Saiba o melhor momento para agir</li>
+                <li>Tome o controle do seu próprio destino</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Sessão de Comentários / Prova Social -->
+    <div class="testimonials-wrapper">
+        <h2 class="section-header">O que dizem os clientes</h2>
+        <div class="testimonials-container">
+            <!-- Comentário 1 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Vini! Eu amei muitooooo a leitura e fiquei realmente impressionado com como fez sentido pra mim nesse momento! Muito obrigado 💐💕"</p>
+                <div class="testimonial-footer">
+                    <span>Bruno B.</span>
+                    <span>15 Jul 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 2 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Fiz mandala com o Vini e ele acertou coisas que até meu Pai de Santo previu, menino lindo cheio de Axé 🙌"</p>
+                <div class="testimonial-footer">
+                    <span>Amanda F.</span>
+                    <span>12 Jul 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 3 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Vini já me tirou de cada furada amorosa kkkk, recomendo!"</p>
+                <div class="testimonial-footer">
+                    <span>Julia F.</span>
+                    <span>05 Jul 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 4 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"muito impecável e assertivo, recomendo sem dúvidas ❤️❤️❤️"</p>
+                <div class="testimonial-footer">
+                    <span>Cida A.</span>
+                    <span>02 Jul 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 5 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"O Vini foi muito certeiro quando pedi a primeira análise focada no trabalho, isso me despertou curiosidade e agora sempre me consulto com ele. "</p>
+                <div class="testimonial-footer">
+                    <span>Fernanda V.</span>
+                    <span>28 Jun 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 6 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Sempre antes de fechar um negócio ou acordo, eu consulto o Vini, pq só Deus sabe o caminhar das coisas, recomendo demais! 🙌"</p>
+                <div class="testimonial-footer">
+                    <span>Bruna P.</span>
+                    <span>21 Jun 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 7 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Recomendo Vini demais! A leitura de relacionamento q ele fez abriu meus olhos. Entendi como eu tava perdido, rsrs."</p>
+                <div class="testimonial-footer">
+                    <span>André G.</span>
+                    <span>17 Jun 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 8 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Fiz a mandala com o Vini e ele é demais!!! super acolhedor e direto. Acertou direitinho sobre minha vida, com certeza vou voltar!"</p>
+                <div class="testimonial-footer">
+                    <span>Priscila W.</span>
+                    <span>15 Jun 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 9 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Sempre recomendo o Vini pras minhas amigas com dedo podre pra homem kkkkkk, muoto bom o guri☝️☝️"</p>
+                <div class="testimonial-footer">
+                    <span>Giulia P.</span>
+                    <span>02 Jun 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 10 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Estava com muita ansiedade e desempregada e o Vinnie acertou direitinho a data da minha contratação."</p>
+                <div class="testimonial-footer">
+                    <span>Otaviana S.</span>
+                    <span>23 Mai 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 11 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Gente, o Vinicius é um profissional muito sensível e empático, até chorei na consulta, muito obrigado!"</p>
+                <div class="testimonial-footer">
+                    <span>Vinicius G.</span>
+                    <span>17 Mai 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 12 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Muito bom mesmo! Explicou direitinho sobre as cartas e me deixou mais calma sobre meu namoro."</p>
+                <div class="testimonial-footer">
+                    <span>Manuela V.</span>
+                    <span>14 Mai 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 13 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"As previsões aconteceram exatamente como ele falou. É chocante e maravilhoso ao mesmo tempo. 😘"</p>
+                <div class="testimonial-footer">
+                    <span>Cleo S.</span>
+                    <span>03 Mai 2026</span>
+                </div>
+            </div>
+            <!-- Comentário 14 -->
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Vinicius é um profissional incrível, me tirou de uma furada amorosa e ainda acertou sobre meu novo emprego. TOP demais, recomendo!"</p>
+                <div class="testimonial-footer">
+                    <span>Hugo P.</span>
+                    <span>23 Abr 2026</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Título de Serviços -->
+    <h2 class="section-header" style="margin-bottom: 40px; margin-top: 20px;">Tipos de Jogos Oferecidos</h2>
+
+    <!-- Alerta de Formato de Entrega -->
+    <div class="delivery-alert">
+        🎙️ <strong>Praticidade e Conforto:</strong> Todos os jogos são realizados e entregues via <strong>áudio ou ligação por WhatsApp</strong>. Você recebe sua consulta no celular para ouvir onde e quando quiser!
+    </div>
+
+    <!-- Serviço 1 -->
+    <div class="service-card">
+        <div class="service-title">Pergunta Simples</div>
+        <div class="price-tag">R$ 70,00</div>
+        <p class="service-desc">
+            Ideal para aflições imediatas ou quando você precisa de um direcionamento rápido. Receba uma resposta clara e objetiva para não dar um passo em falso.
+        </p>
+        <div class="payment-info">
+            ⚠️ <strong>Atenção:</strong> Atendimento apenas com pagamento prévio via PIX.<br>
+            <strong>Chave PIX:</strong> 11991849771<br>
+            <em>Após decidir o seu jogo e fazer o pagamento, basta enviar o comprovante no WhatsApp para garantirmos seu agendamento.</em>
+        </div>
+        <a href="https://wa.me/551199849771?text=Olá%20Vini,%20gostaria%20de%20agendar%20uma%20Pergunta%20Simples!" class="cta-button" target="_blank">
+            <i class="fab fa-whatsapp"></i> Agendar Agora
+        </a>
+    </div>
+
+    <!-- Serviço 2 -->
+    <div class="service-card">
+        <div class="service-title">Análise de Relacionamento</div>
+        <div class="price-tag">R$ 120,00</div>
+        <p class="service-desc">
+            Não sofra por incertezas no amor. Analisaremos minuciosamente a dinâmica da sua relação: quais são as reais intenções, os sentimentos, o nível de química sexual, atitudes presentes e o futuro aguardado para o casal.
+        </p>
+        <div class="payment-info">
+            ⚠️ <strong>Atenção:</strong> Atendimento apenas com pagamento prévio via PIX.<br>
+            <strong>Chave PIX:</strong> 11991849771<br>
+            <em>Após decidir o seu jogo e fazer o pagamento, basta enviar o comprovante no WhatsApp para garantirmos seu agendamento.</em>
+        </div>
+        <a href="https://wa.me/5511991849771?text=Olá%20Vini,%20gostaria%20de%20agendar%20uma%20Análise%20de%20Relacionamento!" class="cta-button" target="_blank">
+            <i class="fab fa-whatsapp"></i> Agendar Agora
+        </a>
+    </div>
+
+    <!-- Serviço 3 -->
+    <div class="service-card">
+        <div class="service-title">Análise de Setores da Vida</div>
+        <div class="price-tag">R$ 150,00</div>
+        <p class="service-desc">
+            Sente que uma área está bloqueada? Escolha um setor específico da sua vida (amoroso, financeiro, trabalho) e abriremos uma mandala rica em detalhes para mapear o andamento completo dessa área por até 1 ano.
+        </p>
+        <div class="payment-info">
+            ⚠️ <strong>Atenção:</strong> Atendimento apenas com pagamento prévio via PIX.<br>
+            <strong>Chave PIX:</strong> 11991849771<br>
+            <em>Após decidir o seu jogo e fazer o pagamento, basta enviar o comprovante no WhatsApp para garantirmos seu agendamento.</em>
+        </div>
+        <a href="https://wa.me/5511991849771?text=Olá%20Vini,%20gostaria%20de%20agendar%20uma%20Análise%20de%20Setores%20da%20Vida!" class="cta-button" target="_blank">
+            <i class="fab fa-whatsapp"></i> Agendar Agora
+        </a>
+    </div>
+
+    <!-- Serviço 4 -->
+    <div class="service-card">
+        <div class="service-title">Mandala Astrológica</div>
+        <div class="price-tag">R$ 240,00</div>
+        <p class="service-desc">
+            A bússola definitiva do seu destino. Nesta leitura completa, <strong>todas as áreas da sua vida são cobertas</strong> simultaneamente. Entenda a energia que rege sua jornada e tenha uma previsão profunda de até 6 meses.
+        </p>
+        <div class="payment-info">
+            ⚠️ <strong>Atenção:</strong> Atendimento apenas com pagamento prévio via PIX.<br>
+            <strong>Chave PIX:</strong> 11991849771<br>
+            <em>Após decidir o seu jogo e fazer o pagamento, basta enviar o comprovante no WhatsApp para garantirmos seu agendamento.</em>
+        </div>
+        <a href="https://wa.me/5511991849771?text=Olá%20Vini,%20gostaria%20de%20agendar%20uma%20Mandala%20Astrológica!" class="cta-button" target="_blank">
+            <i class="fab fa-whatsapp"></i> Agendar Agora
+        </a>
+    </div>
+
+    <!-- Serviço 5 -->
+    <div class="service-card">
+        <div class="service-title">Consulta Completa</div>
+        <div class="price-tag">R$ 300,00</div>
+        <p class="service-desc">
+            Sua oportunidade de não deixar pedra sobre pedra. Você aproveita o tempo de <strong>até 1 hora inteira</strong> para fazer absolutamente todas as perguntas que quiser. Desvende os mistérios e assuma o controle da sua jornada.
+        </p>
+        <div class="payment-info">
+            ⚠️ <strong>Atenção:</strong> Atendimento apenas com pagamento prévio via PIX.<br>
+            <strong>Chave PIX:</strong> 11991849771<br>
+            <em>Após decidir o seu jogo e fazer o pagamento, basta enviar o comprovante no WhatsApp para garantirmos seu agendamento.</em>
+        </div>
+        <a href="https://wa.me/5511991849771?text=Olá%20Vini,%20gostaria%20de%20agendar%20uma%20Consulta%20Completa!" class="cta-button" target="_blank">
+            <i class="fab fa-whatsapp"></i> Agendar Agora
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
